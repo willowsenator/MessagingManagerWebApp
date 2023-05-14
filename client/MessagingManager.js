@@ -2,7 +2,7 @@ const fs = require('fs');
 const Web3 = require('web3');
 const ABI_MANAGER = JSON.parse(fs.readFileSync("./abi_messaging_manager.json"));
 const MANAGER_SMART_CONTRACT_ADDRESS = "0x9A8e4a18d7AEcC417Ae7798D7F2E059A9AB948DD";
-const PRIVATE_KEY = "PRIVATE_KEY"; // Change with your PRIVATE_KEY
+const PRIVATE_KEY = "YOUR_PRIVATE_KEY"; // Change with your PRIVATE_KEY
 const RPC_URL = "https://polygon-mumbai.infura.io/v3/f46dd658f6d6412c97e10ae92f624961";
 
 class MessagingManager{
