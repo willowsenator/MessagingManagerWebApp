@@ -1,9 +1,9 @@
 const fs = require('fs');
 const Web3 = require('web3');
-const abi = JSON.parse(fs.readFileSync("./abi.json"));
-const SMART_CONTRACT_ADDRESS = "0x9A8e4a18d7AEcC417Ae7798D7F2E059A9AB948DD";
+const ABI_MANAGER = JSON.parse(fs.readFileSync("./abi_messaging_manager.json"));
+const MANAGER_SMART_CONTRACT_ADDRESS = "0x9A8e4a18d7AEcC417Ae7798D7F2E059A9AB948DD";
 const PRIVATE_KEY = "YOUR_PRIVATE_KEY"; // Change with your PRIVATE_KEY
-const RPC_URL = "https://polygon-mumbai.infura.io/v3/f46dd658f6d6412c97e10ae92f624961"
+const RPC_URL = "https://polygon-mumbai.infura.io/v3/f46dd658f6d6412c97e10ae92f624961";
 
 class MessagingManager{
     web3;
@@ -11,8 +11,7 @@ class MessagingManager{
 
     constructor(){
         this.web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
-        this.messagingSmartContract = new this.web3.eth.Contract(abi, SMART_CONTRACT_ADDRESS);
-        
+        this.messagingSmartContract = new this.web3.eth.Contract(ABI_MANAGER, MANAGER_SMART_CONTRACT_ADDRESS);
     }
 
     async getAllMessages(){
@@ -27,7 +26,7 @@ class MessagingManager{
         // Sign Transaction with private key
         const createTransaction = await this.web3.eth.accounts.signTransaction(
             {
-                to: SMART_CONTRACT_ADDRESS,
+                to: MANAGER_SMART_CONTRACT_ADDRESS,
                 data: writeMessageTx.encodeABI(),
                 gas: 470000
             },
@@ -46,7 +45,7 @@ class MessagingManager{
         // Sign Transaction with private key
         const createTransaction = await this.web3.eth.accounts.signTransaction(
             {
-                to: SMART_CONTRACT_ADDRESS,
+                to: MANAGER_SMART_CONTRACT_ADDRESS,
                 data: markAllMessagesAsReadTx.encodeABI(),
                 gas: 470000
             },
