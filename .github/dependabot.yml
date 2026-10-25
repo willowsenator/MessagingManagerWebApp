@@ -20,3 +20,8 @@ updates:
         update-types: ["minor", "patch"]
         patterns:
           - "*"
+    ignore:
+      # The app stays on web3 1.x (pinned with npm overrides); 2.x and later need a client migration.
+      # A versions range, unlike update-types, also blocks security updates that bump web3.
+      - dependency-name: "web3"
+        versions: [">= 2.0.0"]
